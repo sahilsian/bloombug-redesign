@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://kickitweb.ca
+
+# Sitemaps
+Sitemap: https://kickitweb.ca/sitemap.xml

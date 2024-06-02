@@ -1,0 +1,1 @@
+export { HeadingLabel } from './HeadingLabel'

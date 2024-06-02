@@ -1,0 +1,1 @@
+export { MiniCover } from './MiniCover'

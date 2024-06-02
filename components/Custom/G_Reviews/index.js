@@ -1,0 +1,1 @@
+export {G_Reviews} from './G_Reviews'

@@ -1,0 +1,1 @@
+export { ImageText } from './ImageText'
