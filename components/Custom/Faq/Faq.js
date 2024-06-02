@@ -14,7 +14,7 @@ export const Faq = ( {list} ) => {
                     <div key={id} className="py-3">  
                         <div onClick={()=> {
                                 setActive(active == id ? null : id)
-                            }} style={{ color: (active == id && siteConfig.colors.solids.primary)}} className={`${getFontSizeForHeading(6)} select-none cursor-pointer flex justify-between`}>
+                            }} style={{ color: (active == id && siteConfig.colors.solids.primary)}} className={` text-[22px] py-1 select-none cursor-pointer flex justify-between`}>
                             <div>
                                 {item.question}
                             </div>
