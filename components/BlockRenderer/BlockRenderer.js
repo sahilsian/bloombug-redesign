@@ -30,6 +30,7 @@ import { Logos } from '../Custom/Logos'
 import { Card } from '../Custom/Card'
 import { Faq } from '../Custom/Faq'
 import { Benefits } from '../Custom/Benefits'
+import { Calendly } from '../Custom/Calendly'
 import { G_Reviews } from '../Custom/G_Reviews'
 import { ServiceHighlights } from '../Custom/ServiceHighlights'
 import mapACFRepeater from '../../lib/mapACFRepeater'
@@ -196,6 +197,12 @@ export const BlockRenderer = ({ items, blocks }) => {
                         idscroll={block.attributes.data.idscroll}
                     ></MiniCover>
                 )
+            }
+
+            case "acf/calendly": {
+                console.log(block)
+                return <Calendly calendlyURL={block.attributes.data.calendlyURL}>
+                </Calendly>
             }
 
             case "acf/pricing-block": {

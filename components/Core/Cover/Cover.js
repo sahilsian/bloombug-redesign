@@ -14,8 +14,8 @@ export const Cover = ({children, background, className}) => {
     speed: 5,
     });
     return (
-        <div style={{ '--primary-color': siteConfig.colors.solids.primary }} className={`${className} primary-bg overflow-hidden h-[860px] relative flex`}>
-            <div ref={parallaxColumns.ref} className={`w-full z-20 pt-[120px] md:pt-[200px] lg:pt-[170px]`}>
+        <div style={{ '--primary-color': siteConfig.colors.solids.primary }} className={`${className} primary-bg overflow-hidden h-[900px] relative flex`}>
+            <div ref={parallaxColumns.ref} className={`w-full z-20 pt-[120px] md:pt-[200px] lg:pt-[200px]`}>
             {children}
             </div>
             <div className={`w-[110%] h-[110%] top-[-20px] absolute`}>

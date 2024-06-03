@@ -18,6 +18,7 @@ const siteConfig = {
     },
     texts: {
         sitename: "Bloom Bug Screens",
+        siteurl: "bloombug.ca",
         formvalidation: "By opting into the web form above you are providing consent Bloom Bug Screens to contact you back for your inquiry.",
         footer : {
             footertext: "We are all female owned SME located in Surrey, BC specializing in top-quality bug screens, soft closed retractable screens, window blinds & roller shades, shower doors and in-home painting services. We use high-quality raw materials in all our projects.",

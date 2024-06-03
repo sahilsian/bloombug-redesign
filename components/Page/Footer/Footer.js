@@ -85,8 +85,8 @@ export const Footer = ({ items, callToActionLabel, callToActionDestination }) =>
                         <h4 className="">© 2024 Bloom Bug Screens</h4>
                     </div>
                     <div className="flex gap-5">
-                        <Link className="transition-all opacity-70 hover:opacity-100" href={"/privacy-policy"}>Privacy Policy</Link>
-                        <Link className="transition-all opacity-70 hover:opacity-100" href={"/terms-of-service"}>Terms</Link>
+                        <Link className="transition-all opacity-70 hover:opacity-100" href={"/company/privacy-policy"}>Privacy Policy</Link>
+                        <Link className="transition-all opacity-70 hover:opacity-100" href={"/company/terms-of-service"}>Terms</Link>
                     </div>
 
                 </div>
