@@ -21,7 +21,7 @@ const siteConfig = {
         siteurl: "bloombug.ca",
         formvalidation: "By opting into the web form above you are providing consent Bloom Bug Screens to contact you back for your inquiry.",
         footer : {
-            footertext: "We are all female owned SME located in Surrey, BC specializing in top-quality bug screens, soft closed retractable screens, window blinds & roller shades, shower doors and in-home painting services. We use high-quality raw materials in all our projects.",
+            footertext: "Bug screens near me? Keep the bugs out of your bedroom, kitchen, restaurant with Bloom Bug Screens. We install screens for homes and businesses in Vancouver, Surrey, Langley, Coquitlam, Burnaby, Delta and other cities across the lower mainland.",
             email: "hello@bloombug.ca",
             phone: "(604) 722-4371",
             location: "G-1100 Lansdowne Dr Coquitlam BC inside Vivid Tile & Stone",
