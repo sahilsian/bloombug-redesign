@@ -28,11 +28,11 @@ export const G_Reviews = ({ reviews }) => {
                         </div>
                         <div className="flex justify-between">
                             <div className="flex gap-3 items-center text-[14px] font-medium">
-                            <Image src={item.profile} height={30} width={30}></Image>
+                            <Image alt="user image" src={item.profile} height={30} width={30}></Image>
                             {item.name}
                             </div>
                             <div>
-                                <Image width={30} height={30} src={'/google-logo.png'}></Image>
+                                <Image alt="google logo" width={30} height={30} src={'/google-logo.png'}></Image>
                             </div>
                         </div>
                     </div>
