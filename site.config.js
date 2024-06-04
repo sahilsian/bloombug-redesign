@@ -31,7 +31,6 @@ const siteConfig = {
             tiktok: "https://www.tiktok.com/@bloom.bug.screens",
             cta: "Get a Quote with Bloom Bug Screens Today"
         }
-        
     }
   };
 

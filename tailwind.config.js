@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 /** Config file for the site theme */
 
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
@@ -16,6 +18,11 @@ module.exports = {
         success: '#0070f3',
         cyan: '#79FFE1',
         'text-main': '#32353A'
+      },
+      textShadow: {
+        sm: '0 1px 2px #000000',
+        DEFAULT: '0px 2px 10px #000000',
+        lg: '0 8px 16px #000000',
       },
       transitionProperty: {
         'height': 'height',
@@ -44,5 +51,16 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          'text-shadow': (value) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme('textShadow') }
+      )
+    }),
+  ],
 }
