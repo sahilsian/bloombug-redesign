@@ -61,6 +61,7 @@ export const Page = (props) => {
                 <meta name="twitter:description" content={props.seo.metaDesc}></meta>
                 <meta name="twitter:image" content={props.seo.opengraphImage?.uri || "/opengraph-default.png"}></meta>
             </Head>
+            <GoogleAnalytics gaId="G-CHR0TKY6LB" />
             <div className='relative overflow-hidden w-full '>
                 <div style={{width: active ? "300px" : "0px", transition: "width 0.2s", backgroundColor: siteConfig.colors.solids.cover}} className='fixed h-[200%] overflow-hidden z-[50]'>
                     <div className='pt-[120px] px-[20px]'>
