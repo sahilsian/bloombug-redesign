@@ -36,6 +36,7 @@ export default function TextAreaField({ field, fieldErrors }: Props) {
   const { state, dispatch } = useGravityForm();
   const fieldValue = state.find((fieldValue: FieldValue) => fieldValue.id === id) as StringFieldValue | undefined;
   const value = fieldValue?.value || DEFAULT_VALUE;
+
   function checkConditionalLogic() {
     if (!conditionalLogic) return true
 
@@ -43,7 +44,9 @@ export default function TextAreaField({ field, fieldErrors }: Props) {
       const targetField = state.find(f => f.id === rule.fieldId)
       if (!targetField) return false
 
+      //@ts-ignore
       const targetValue = targetField.checkboxValues.find(cv => cv.value === rule.value)
+      
       return rule.operator === "IS" ? Boolean(targetValue) : !targetValue
     })
   }

@@ -54,7 +54,9 @@ export default function CheckboxField({ field, fieldErrors }) {
   console.log(state)
   console.log(field)
   const fieldValue = state.find(fieldValue => fieldValue.id === id)
+  //@ts-ignore
   const checkboxValues = fieldValue?.checkboxValues || DEFAULT_VALUE
+
   function handleChange(event) {
     const { name, value, checked } = event.target
     const otherCheckboxValues = checkboxValues.filter(
@@ -80,7 +82,9 @@ export default function CheckboxField({ field, fieldErrors }) {
       const targetField = state.find(f => f.id === rule.fieldId)
       if (!targetField) return false
 
+      //@ts-ignore
       const targetValue = targetField.checkboxValues.find(cv => cv.value === rule.value)
+
       return rule.operator === "IS" ? Boolean(targetValue) : !targetValue
     })
   }
