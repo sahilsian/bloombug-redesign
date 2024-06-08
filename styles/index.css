@@ -46,6 +46,10 @@ html, body {
   }
 }
 
+.gfield {
+  margin-bottom: 20px;
+}
+
 .menu {
   display: none;
   

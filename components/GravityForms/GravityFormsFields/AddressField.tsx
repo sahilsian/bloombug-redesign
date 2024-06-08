@@ -64,32 +64,18 @@ export default function AddressField({ field, fieldErrors }: Props) {
   }
 
   return (
-    <fieldset id={htmlId} className={`gfield w-full grid grid-cols-2 justify-evenly gap-4 gfield-${type} ${cssClass}`.trim()}>
-      <legend className="text-sm font-[400] mb-3">{label} {isRequired ? " *" : " "}</legend>
+    <fieldset id={htmlId} className={`gfield w-full grid grid-cols-1 justify-evenly gap-4 gfield-${type} ${cssClass}`.trim()}>
+      {/* <legend className="label mb-3">{label} {isRequired ? " *" : " "}</legend> */}
+      
       {inputs?.map(input => {
         const key = input?.key as keyof AddressInput;
         const inputLabel = input?.customLabel || '';
         const placeholder = input?.placeholder || '';
+        console.log()
         return (
-          !input.isHidden && 
-          input.key === 'country' ? 
+          !input.isHidden &&
           <div key={key} className="">
-            <label className="label" htmlFor={`input_${id}_${key}`}>{`${inputLabel}`}</label>
-            <Input
-              type="text"
-              name={String(key)}
-              id={`input_${id}_${key}`}
-              required={Boolean(isRequired)}
-              placeholder={placeholder}
-              autoComplete={AUTOCOMPLETE_ATTRIBUTES[key]}
-              value={addressValues?.[key] ?? ''}
-              onChange={handleChange}
-            />
-            
-          </div>
-          :
-          <div key={key} className="">
-            <label className="label" htmlFor={`input_${id}_${key}`}>{`${inputLabel}`}</label>
+            <label className="label" htmlFor={`input_${id}_${key}`}>{`${inputLabel} ${isRequired ? " *" : " "}`}</label>
             <Input
               type="text"
               name={String(key)}

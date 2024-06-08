@@ -67,7 +67,7 @@ export default function GravityFormsForm({ form, id }: Props) {
     
   
   return (
-    <form id="form" method="post" className="flex flex-col gap-2" onSubmit={(e)=> {
+    <form id="form" method="post" className="flex flex-col" onSubmit={(e)=> {
       e.preventDefault()
       sendForm()
       }}>

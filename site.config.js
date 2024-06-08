@@ -19,7 +19,7 @@ const siteConfig = {
     texts: {
         sitename: "Bloom Bug Screens",
         siteurl: "bloombug.ca",
-        formvalidation: "By opting into the web form above you are providing consent Bloom Bug Screens to contact you back for your inquiry.",
+        formvalidation: "By opting into the web form above you are providing consent Bloom Bug Screens to contact you back for your inquiry. Bloom Bug Screens is not responsible for any errors in your measurements. Product is non refundable or returnable as all products are custom made. No orders will be processed without a 50% deposit. Our team is happy to work with you in providing a completely bug free home.",
         footer : {
             footertext: "Bug screens near me? Keep the bugs out of your bedroom, kitchen, restaurant with Bloom Bug Screens. We install screens for homes and businesses in Vancouver, Surrey, Langley, Coquitlam, Burnaby, Delta and other cities across the lower mainland.",
             email: "hello@bloombug.ca",
