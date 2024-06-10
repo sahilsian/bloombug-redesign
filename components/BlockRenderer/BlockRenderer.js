@@ -112,11 +112,17 @@ export const BlockRenderer = ({ items, blocks }) => {
             case "acf/logos": {
                 return <Logos
                     logo_1={block.attributes.data.logo_1}
+                    logo_1_link={block.attributes.data.logo_1_link}
                     logo_2={block.attributes.data.logo_2}
+                    logo_2_link={block.attributes.data.logo_2_link}
                     logo_3={block.attributes.data.logo_3}
+                    logo_3_link={block.attributes.data.logo_3_link}
                     logo_4={block.attributes.data.logo_4}
+                    logo_4_link={block.attributes.data.logo_4_link}
                     logo_5={block.attributes.data.logo_5}
+                    logo_5_link={block.attributes.data.logo_5_link}
                     logo_6={block.attributes.data.logo_6}
+                    logo_6_link={block.attributes.data.logo_6_link}
                 >
 
                 </Logos>

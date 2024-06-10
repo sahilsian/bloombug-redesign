@@ -14,6 +14,7 @@ import { TEXT_AREA_FIELD_FIELDS } from "../../components/GravityForms/GravityFor
 import { TEXT_FIELD_FIELDS } from "../../components/GravityForms/GravityFormsFields/TextField";
 import { TIME_FIELD_FIELDS } from "../../components/GravityForms/GravityFormsFields/TimeField";
 import { WEBSITE_FIELD_FIELDS } from "../../components/GravityForms/GravityFormsFields/WebsiteField";
+import { NUMBER_FIELD_FIELDS } from "../../components/GravityForms/GravityFormsFields/NumberField"
 
 const handler = async (req, res) => {
     try {
@@ -74,6 +75,9 @@ const handler = async (req, res) => {
                         ... on TextAreaField {
                             ...TextAreaFieldFields
                         }
+                        ... on NumberField {
+                            ... NumberFieldFields
+                        }
                       }
                       pageInfo {
                         hasNextPage
@@ -104,6 +108,7 @@ const handler = async (req, res) => {
             ${TIME_FIELD_FIELDS}
             ${WEBSITE_FIELD_FIELDS}
             ${TEXT_AREA_FIELD_FIELDS}
+            ${NUMBER_FIELD_FIELDS}
           `,
           variables: { 
             formId

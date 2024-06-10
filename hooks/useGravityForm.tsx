@@ -30,7 +30,11 @@ export interface StringFieldValues extends FieldValue {
   values: string[];
 }
 
-export type FieldValueUnion = AddressFieldValue | CheckboxFieldValue | EmailFieldValue | NameFieldValue | StringFieldValue | StringFieldValues;
+export interface NumberFieldValue extends FieldValue {
+  value: number[];
+}
+
+export type FieldValueUnion = AddressFieldValue | CheckboxFieldValue | EmailFieldValue | NameFieldValue | StringFieldValue | StringFieldValues | NumberFieldValue;
 
 interface Action {
   type: ACTION_TYPES;
@@ -51,6 +55,7 @@ export enum ACTION_TYPES {
   updateTextFieldValue = 'updateTextFieldValue',
   updateTimeFieldValue = 'updateTimeFieldValue',
   updateWebsiteFieldValue = 'updateWebsiteFieldValue',
+  updateNumberFieldValue = 'updateNumberFieldValue'
 }
 
 function reducer(state: FieldValueUnion[], action: Action) {
@@ -76,6 +81,10 @@ function reducer(state: FieldValueUnion[], action: Action) {
     case ACTION_TYPES.updateNameFieldValue: {
       const { id, nameValues } = action.fieldValue as NameFieldValue;
       return [...getOtherFieldValues(id), { id, nameValues }];
+    }
+    case ACTION_TYPES.updateNumberFieldValue: {
+      const { id, value } = action.fieldValue as NumberFieldValue;
+      return [...getOtherFieldValues(id), { id, value }];
     }
     case ACTION_TYPES.updateDateFieldValue:
     case ACTION_TYPES.updatePhoneFieldValue:

@@ -21,15 +21,26 @@ const siteConfig = {
         siteurl: "bloombug.ca",
         formvalidation: "By opting into the web form above you are providing consent Bloom Bug Screens to contact you back for your inquiry. Bloom Bug Screens is not responsible for any errors in your measurements. Product is non refundable or returnable as all products are custom made. No orders will be processed without a 50% deposit. Our team is happy to work with you in providing a completely bug free home.",
         footer : {
-            footertext: "Bug screens near me? Keep the bugs out of your bedroom, kitchen, restaurant with Bloom Bug Screens. We install screens for homes and businesses in Vancouver, Surrey, Langley, Coquitlam, Burnaby, Delta and other cities across the lower mainland.",
+            footertext: "Are bugs bugging you? Let us keep the bugs out of your home, or work spaces with our fly/insect screens. Bloom Bug Screens, is a WBE Certified business with branches in Surrey and Coquitlam. We're specializing in bug/fly screens for your indoor and outdoor needs be it a residence or business space.",
             email: "hello@bloombug.ca",
             phone: "(604) 722-4371",
-            location: "G-1100 Lansdowne Dr Coquitlam BC inside Vivid Tile & Stone",
+            location: "1100 Lansdowne Dr Unit G, Coquitlam, BC V3B 5E2",
+            location_secondary: "Newton, Surrey, BC",
             location_dest: "https://search.app.goo.gl/ZGb5bSk",
             instagram: "https://www.instagram.com/bloombug.ca",
             facebook: "https://www.facebook.com/bloombugscreens/",
             tiktok: "https://www.tiktok.com/@bloom.bug.screens",
-            cta: "Get a Quote with Bloom Bug Screens Today"
+            cta: "Get a Quote with Bloom Bug Screens Today",
+            copyright: "2024 Bloom Bug Screens | All Rights Reserved",
+            hours: {
+                sunday: "Closed",
+                monday: "Closed",
+                tuesday: "9am - 5pm",
+                wednesday: "9am - 5pm",
+                thursday: "9am - 5pm",
+                friday: "9am - 5pm",
+                saturday: "9am - 5pm",
+            }
         }
     }
   };
