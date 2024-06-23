@@ -4,7 +4,6 @@ import { getFontSizeForHeading } from "../../../lib/fonts";
 import Link from "next/link";
 
 export const ServiceHighlights = ({image, title, description, destination}) => {
-    console.log(image)
     return (
         <Link href={destination}>
             <div style={{color: siteConfig.colors.solids.secondary}} className="relativebg-[#fad]  w-full rounded-lg h-[400px] overflow-hidden">

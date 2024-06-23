@@ -11,6 +11,8 @@ import siteConfig from '../../site.config';
 import Link from 'next/link';
 import React from 'react';
 import { CallToActionButton } from '../Custom/CallToActionButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 export const Page = (props) => {
     const router = useRouter()
@@ -20,6 +22,8 @@ export const Page = (props) => {
         setActive(false)
     }, [router.reload])
 
+    console.log(props)
+
     return (
         <div className={`font-heading`}>
             <Head>
@@ -27,8 +31,8 @@ export const Page = (props) => {
                 <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
                 <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png"/>
                 <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png"/>
-                <title>{props.seo.title}</title>
-                <meta name='description' content={props.seo.metaDesc}></meta>
+                <title>{props?.data?.seo?.title || ""}</title>
+                <meta name='description' content={props.data.seo?.metaDesc || ""}></meta>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"></meta>
                 <link
                     rel="stylesheet"
@@ -47,19 +51,19 @@ export const Page = (props) => {
                 />
                 <meta property="og:url" content={`${router.asPath}`}></meta>
                 <meta property="og:type" content="website"></meta>
-                <meta property="og:title" content={props.seo.title}></meta>
-                <meta content={siteConfig.texts.sitename} property="og:site_name"></meta>
-                <meta property="og:description" content={props.seo.metaDesc}
+                <meta property="og:title" content={props.data.seo?.title || ""}></meta>
+                <meta content={siteConfig.texts.sitename || ""} property="og:site_name"></meta>
+                <meta property="og:description" content={props.data.seo?.metaDesc || ""}
                 ></meta>
                 <meta name="theme-color" content={siteConfig.colors.solids.primary}></meta>
-                <meta property="og:image" content={props.seo.opengraphImage?.uri || "/opengraph-default.png"}></meta>
+                <meta property="og:image" content={props.data.seo?.opengraphImage?.uri || "/opengraph-default.png"}></meta>
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <meta name="twitter:card" content="summary_large_image"></meta>
-                <meta property="twitter:domain" content={siteConfig.texts.siteurl}></meta>
+                <meta property="twitter:domain" content={siteConfig.texts.siteurl || ""}></meta>
                 <meta property="twitter:url" content={`${router.asPath}`}></meta>
-                <meta name="twitter:title" content={props.seo.metaDesc}></meta>
-                <meta name="twitter:description" content={props.seo.metaDesc}></meta>
-                <meta name="twitter:image" content={props.seo.opengraphImage?.uri || "/opengraph-default.png"}></meta>
+                <meta name="twitter:title" content={props.data.seo?.metaDesc || ""}></meta>
+                <meta name="twitter:description" content={props.data.seo?.metaDesc || ""}></meta>
+                <meta name="twitter:image" content={props.data.seo?.opengraphImage?.uri || "/opengraph-default.png"}></meta>
             </Head>
             <GoogleAnalytics gaId="G-CHR0TKY6LB" />
             <div className='relative overflow-hidden w-full '>
@@ -67,7 +71,7 @@ export const Page = (props) => {
                     <div className='pt-[120px] px-[20px]'>
 
                     {/* Mobile Menu */}
-                    {props.mainMenuItems.map((item) => {
+                    {props.data.mainMenuItems.map((item) => {
                         return (
                             <div>
                             <div style={{opacity: active ? "100" : "0", transition: '0.3s opacity ease'}} className='text-white'>
@@ -90,7 +94,15 @@ export const Page = (props) => {
                     })}
                     </div>
                     <div style={{opacity: active ? "100" : "0", transition: '0.3s all ease'}} className='p-4'>
-                        <CallToActionButton destination={props.callToActionDestination} buttonLabel={props.callToActionLabel} type="primary"></CallToActionButton>
+                        <div className='my-4'>
+                        <CallToActionButton destination={props.data.callToActionDestination} buttonLabel={props.data.callToActionLabel} type="primary"></CallToActionButton>
+                        </div>
+                        <div className='my-4'>
+                            <Link href={props.data.shop || "/"} className="text-white pr-6 ">
+                                <FontAwesomeIcon className="over:opacity-80 transition-all" style={{ width: "24px", height: "24px" }} size="sm" icon={faCartShopping} />
+                            </Link>    
+                        </div>
+                        
                     </div>
 
                 </div>
@@ -100,12 +112,19 @@ export const Page = (props) => {
                     <MainMenu active={active} onClick={()=> {
                         setActive(!active);
                         
-                    }} items={props.mainMenuItems} callToActionLabel={props.callToActionLabel} callToActionDestination={props.callToActionDestination}></MainMenu>
+                    }} items={props.data.mainMenuItems} shop_destination={props.data.shop || ""} callToActionLabel={props.data.callToActionLabel} callToActionDestination={props.data.callToActionDestination}></MainMenu>
                     <Analytics></Analytics>
+                    {"blocks" in props.data &&
                     <ParallaxProvider>
-                        <BlockRenderer items={props.mainMenuItems} blocks={props.blocks}></BlockRenderer>
+                        <BlockRenderer items={props.data.mainMenuItems} blocks={props.data.blocks}></BlockRenderer>
                     </ParallaxProvider>
-                    <Footer callToActionLabel={props.callToActionLabel} callToActionDestination={props.callToActionDestination} items={props.mainMenuItems}></Footer>
+                    }
+                    {"products" in props.data &&
+                    <>
+                    </>
+                    }
+                    
+                    <Footer callToActionLabel={props.data.callToActionLabel} callToActionDestination={props.data.callToActionDestination} items={props.data.mainMenuItems}></Footer>
                 </div>
             </div>
 

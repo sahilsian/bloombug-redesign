@@ -3,7 +3,6 @@ import siteConfig from "../../../site.config"
 import { getFontSizeForHeading } from "../../../lib/fonts"
 
 export const Benefits = ({ benefits }) => {
-    console.log(benefits)
     return (
         <div className="flex justify-stretch flex-wrap w-full sm:grid sm:grid-cols-2 md:grid md:grid-cols-3 gap-4">
             {benefits.map((item) => {

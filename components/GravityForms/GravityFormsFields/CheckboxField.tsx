@@ -51,8 +51,6 @@ export default function CheckboxField({ field, fieldErrors }) {
   const htmlId = `field_${id}`
   const { state, dispatch } = useGravityForm()
 
-  console.log(state)
-  console.log(field)
   const fieldValue = state.find(fieldValue => fieldValue.id === id)
   //@ts-ignore
   const checkboxValues = fieldValue?.checkboxValues || DEFAULT_VALUE

@@ -71,7 +71,6 @@ export default function AddressField({ field, fieldErrors }: Props) {
         const key = input?.key as keyof AddressInput;
         const inputLabel = input?.customLabel || '';
         const placeholder = input?.placeholder || '';
-        console.log()
         return (
           !input.isHidden &&
           <div key={key} className="">

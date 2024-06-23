@@ -79,7 +79,6 @@ export const BlockRenderer = ({ items, blocks }) => {
             }
 
             case "acf/service-highlights": {
-                console.log(block)
                 return <ServiceHighlights 
                 image={block.attributes.data.image} 
                 title={block.attributes.data.title} 
@@ -90,7 +89,6 @@ export const BlockRenderer = ({ items, blocks }) => {
             }
 
             case "acf/faq" : {
-                console.log(block)
                 return <Faq list={mapACFRepeater(block.attributes.data)}>
 
                 </Faq>
@@ -206,7 +204,6 @@ export const BlockRenderer = ({ items, blocks }) => {
             }
 
             case "acf/calendly": {
-                console.log(block)
                 return <Calendly calendlyURL={block.attributes.data.calendlyURL}>
                 </Calendly>
             }
@@ -403,7 +400,6 @@ export const BlockRenderer = ({ items, blocks }) => {
             }
 
             default: {
-                console.log("UNKNOWN:", block)
                 return null;
             }
         }

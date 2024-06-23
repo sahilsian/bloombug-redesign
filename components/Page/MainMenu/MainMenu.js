@@ -4,13 +4,13 @@ import { CallToActionButton } from "../../Custom/CallToActionButton";
 import Link from "next/link";
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faCartShopping, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { Heading } from "../../Core/Heading";
 import { Paragraph } from "../../Core/Paragraph";
 import { Label } from "../../Custom/Label";
 import { useCallback, useEffect, useState } from "react";
 
-export const MainMenu = ({ items, active, callToActionLabel, callToActionDestination, onClick }) => {
+export const MainMenu = ({ items, active, callToActionLabel, callToActionDestination, shop_destination, onClick }) => {
     const router = useRouter();
 
     const [scrollY, setScrollY] = useState('');
@@ -89,10 +89,16 @@ export const MainMenu = ({ items, active, callToActionLabel, callToActionDestina
                         </div>
                         
                     </div>
+
                     {/* Call to Action */}
                     <div className="flex items-center max-[1020px]:hidden">
+                        <Link href={shop_destination || "/"} className="text-white pr-6">
+                            <FontAwesomeIcon className="over:opacity-80 transition-all" style={{ width: "24px", height: "24px" }} size="sm" icon={faCartShopping} />
+                        </Link>
+                        <div>
                             <CallToActionButton destination={callToActionDestination} buttonLabel={callToActionLabel} type="secondary"></CallToActionButton>
                         </div>
+                    </div>
 
                     {/* Mobile Header Button */}
                     <div className="my-7 flex items-center cursor-pointer menu" onClick={onClick}>

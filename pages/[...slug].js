@@ -15,6 +15,13 @@ export const getStaticPaths = async () => {
             pages {
               nodes {
                 uri
+                id
+              }
+            }
+            products {
+              nodes {
+                uri
+                databaseId
               }
             }
           }
@@ -23,9 +30,10 @@ export const getStaticPaths = async () => {
 
 
     return {
-        paths: [...data.pages.nodes].filter(page => page.uri !== "/").map(page => ({
+        paths: [...data.pages.nodes, ...data.products.nodes].filter(page => page.uri !== "/").map(page => ({
             params: {
-                slug: page.uri.substring(1, page.uri.length - 1).split("/")
+                slug: page.uri.substring(1, page.uri.length - 1).split("/"),
+                id: page.databaseId ? page.databaseId.toString() : page.id.toString()
             }
         })),
         fallback: "blocking"
