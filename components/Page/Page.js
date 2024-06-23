@@ -97,11 +97,6 @@ export const Page = (props) => {
                         <div className='my-4'>
                         <CallToActionButton destination={props.data.callToActionDestination} buttonLabel={props.data.callToActionLabel} type="primary"></CallToActionButton>
                         </div>
-                        <div className='my-4'>
-                            <Link href={props.data.shop || "/"} className="text-white pr-6 ">
-                                <FontAwesomeIcon className="over:opacity-80 transition-all" style={{ width: "24px", height: "24px" }} size="sm" icon={faCartShopping} />
-                            </Link>    
-                        </div>
                         
                     </div>
 

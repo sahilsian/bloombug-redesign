@@ -101,9 +101,15 @@ export const MainMenu = ({ items, active, callToActionLabel, callToActionDestina
                     </div>
 
                     {/* Mobile Header Button */}
-                    <div className="my-7 flex items-center cursor-pointer menu" onClick={onClick}>
-                        <FontAwesomeIcon className="hover:opacity-80 transition-all" style={{ width: "24px", height: "24px" }} color={"#FFFFFF"} size="sm" icon={faBars} />
+                    <div className="flex items-center  menu">
+                        <Link href={shop_destination || "/"} className="text-white pr-6 cursor-pointer">
+                                    <FontAwesomeIcon className="over:opacity-80 transition-all" style={{ width: "24px", height: "24px" }} size="sm" icon={faCartShopping} />
+                        </Link>  
+                        <div className="my-7 flex items-center cursor-pointer" onClick={onClick}>
+                            <FontAwesomeIcon className="hover:opacity-80 transition-all" style={{ width: "24px", height: "24px" }} color={"#FFFFFF"} size="sm" icon={faBars} />
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
