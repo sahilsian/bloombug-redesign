@@ -153,14 +153,14 @@ const CartContents = () => {
                             {item.subtotal}
                           </div>
                           <div className=' cursor-pointer text-right'>
-                            <span onClick={() => {
+                            <div  onClick={() => {
                               handleRemoveProductClick(
                                 item.key,
                                 data.cart.contents.nodes,
                               )
-                            }} className='border-2 p-2'>
-                              <FontAwesomeIcon icon={faClose}></FontAwesomeIcon>
-                            </span>
+                            }} className='border-2 p-2 flex items-center justify-center'>
+                              <FontAwesomeIcon width={"24px"} height={"24px"} icon={faClose}></FontAwesomeIcon>
+                            </div>
                           </div>
                         </div>
                       </div>
