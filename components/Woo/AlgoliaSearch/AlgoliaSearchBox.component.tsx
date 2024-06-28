@@ -5,8 +5,8 @@ import { useState } from 'react';
 import SearchResults from './SearchResults.component';
 
 const searchClient = algoliasearch(
-  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID ?? 'changeme',
-  process.env.NEXT_PUBLIC_ALGOLIA_PUBLIC_API_KEY ?? 'changeme',
+  process.env.ALGOLIA_APP_ID ?? 'changeme',
+  process.env.ALGOLIA_PUBLIC_API_KEY ?? 'changeme',
 );
 
 // https://www.algolia.com/doc/api-reference/widgets/instantsearch/react/
