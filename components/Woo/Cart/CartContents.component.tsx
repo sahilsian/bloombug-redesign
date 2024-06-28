@@ -107,7 +107,7 @@ const CartContents = () => {
   }, [refetch]);
 
   return (
-    <section className="py-8 mt-10">
+    <section className="py-8 mt-10 pb-[200px]">
       <div className="container items-center mx-auto">
       <div className='mt-10 p-4 border-2 mx-auto'>
 
