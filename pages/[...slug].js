@@ -9,6 +9,7 @@ export default Page;
 export const getStaticProps = getPageStaticProps
 
 export const getStaticPaths = async () => {
+
     const { data } = await client.query({
         query: gql`
         query AllPagesQuery {
@@ -18,22 +19,15 @@ export const getStaticPaths = async () => {
                 id
               }
             }
-            products {
-              nodes {
-                uri
-                databaseId
-              }
-            }
           }
         `
     })
 
-
+    console.log(JSON.stringify(data, null, 2))
     return {
-        paths: [...data.pages.nodes, ...data.products.nodes].filter(page => page.uri !== "/").map(page => ({
+        paths: [...data.pages.nodes].filter(page => page.uri !== "/").map(page => ({
             params: {
                 slug: page.uri.substring(1, page.uri.length - 1).split("/"),
-                id: page.databaseId ? page.databaseId.toString() : page.id.toString()
             }
         })),
         fallback: "blocking"

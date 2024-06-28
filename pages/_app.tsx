@@ -1,16 +1,18 @@
 import { AppProps } from 'next/app'
-import { ApolloProvider } from "@apollo/client";
+import { ApolloProvider, gql } from "@apollo/client";
 import client from '../lib/client';
 import '../styles/index.css'
 import NextNProgress from 'nextjs-progressbar';
 import { useEffect } from 'react';
+import Cookies from 'js-cookie';
 import AOS from "aos";
 import "aos/dist/aos.css";
 import React from 'react';
 import siteConfig from '../site.config';
-
+import { CartProvider } from '../stores/CartProvider';
 
 function MyApp({ Component, pageProps }: AppProps) {
+
   useEffect(() => {
     AOS.init({
       easing: "ease-out-cubic",
@@ -18,7 +20,19 @@ function MyApp({ Component, pageProps }: AppProps) {
       offset: 50,
     });
   }, []);
-  return <><NextNProgress color={siteConfig.colors.solids.accent} /> <div className="font-body"><Component {...pageProps} /></div></>
+
+  return (
+    <ApolloProvider client={client}>
+      <NextNProgress color={siteConfig.colors.solids.accent} />
+      <div className="font-body">
+        <CartProvider>
+          <Component {...pageProps} />
+        </CartProvider>
+
+      </div>
+
+    </ApolloProvider>
+  )
 }
 
 export default MyApp

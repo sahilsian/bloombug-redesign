@@ -23,18 +23,20 @@ export const GET_SINGLE_PRODUCT = gql`
         price
         id
         stockQuantity
+        shortDescription
       }
       ... on VariableProduct {
         salePrice
         regularPrice
+        shortDescription
         price
         id
-        allPaColors {
+        allPaColor {
           nodes {
             name
           }
         }
-        allPaSizes {
+        allPaSize {
           nodes {
             name
           }
@@ -106,7 +108,7 @@ export const FETCH_FIRST_PRODUCTS_FROM_HOODIES_QUERY = `
 /**
  * Fetch first 200 Woocommerce products from GraphQL
  */
-export const FETCH_ALL_PRODUCTS_QUERY = gql`
+export const FETCH_ALL_PRODUCTS = gql`
   query MyQuery {
     products(first: 50) {
       nodes {
@@ -114,6 +116,7 @@ export const FETCH_ALL_PRODUCTS_QUERY = gql`
         name
         onSale
         slug
+        description
         image {
           sourceUrl
         }

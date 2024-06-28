@@ -11,8 +11,6 @@ import siteConfig from '../../site.config';
 import Link from 'next/link';
 import React from 'react';
 import { CallToActionButton } from '../Custom/CallToActionButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 export const Page = (props) => {
     const router = useRouter()
@@ -23,7 +21,6 @@ export const Page = (props) => {
     }, [router.reload])
 
     console.log(props)
-
     return (
         <div className={`font-heading`}>
             <Head>
@@ -109,15 +106,9 @@ export const Page = (props) => {
                         
                     }} items={props.data.mainMenuItems} shop_destination={props.data.shop || ""} callToActionLabel={props.data.callToActionLabel} callToActionDestination={props.data.callToActionDestination}></MainMenu>
                     <Analytics></Analytics>
-                    {"blocks" in props.data &&
                     <ParallaxProvider>
                         <BlockRenderer items={props.data.mainMenuItems} blocks={props.data.blocks}></BlockRenderer>
                     </ParallaxProvider>
-                    }
-                    {"products" in props.data &&
-                    <>
-                    </>
-                    }
                     
                     <Footer callToActionLabel={props.data.callToActionLabel} callToActionDestination={props.data.callToActionDestination} items={props.data.mainMenuItems}></Footer>
                 </div>

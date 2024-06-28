@@ -44,6 +44,11 @@ html, body {
   .mobilecenter {
     justify-content: center;
   }
+
+  .products {
+    grid-template-columns: repeat(1, 1fr) !important;
+    grid-template-rows: repeat(1, auto) !important;
+  }
 }
 
 .gfield {
@@ -62,13 +67,36 @@ p > a {
 
 @media screen and (max-width: 800px) {
   
-.wrapreverse {
-  flex-wrap: wrap-reverse;
+  .wrapreverse {
+    flex-wrap: wrap-reverse;
+  }
 }
+
+.setHTML ul {
+  list-style-type: disc; /* Ensures bullets are shown */
+  padding-left: 20px;    /* Adds some padding for better alignment */
+  margin-top: 1rem;      /* Adds some margin at the top */
+}
+
+.setHTML li {
+  margin-bottom: 1rem; /* Adds some spacing between list items */
+}
+
+.setHTML p {
+  margin-bottom: 12px;
 }
 
 @media screen and (max-width: 1020px) {
   .menu {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .ais-SearchBox-input {
+    width: 100%;
+  }
+  .ais-SearchBox-form {
     display: flex;
   }
 }

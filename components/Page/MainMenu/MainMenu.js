@@ -9,6 +9,7 @@ import { Heading } from "../../Core/Heading";
 import { Paragraph } from "../../Core/Paragraph";
 import { Label } from "../../Custom/Label";
 import { useCallback, useEffect, useState } from "react";
+import Cart from "../../Woo/Header/Cart.component";
 
 export const MainMenu = ({ items, active, callToActionLabel, callToActionDestination, shop_destination, onClick }) => {
     const router = useRouter();
@@ -85,26 +86,27 @@ export const MainMenu = ({ items, active, callToActionLabel, callToActionDestina
                                 })}
 
                             </div>
+                            <Link href={"/products"}>
+                            <div className="link text-white px-6">Shop</div>
+                            </Link>
+
+
 
                         </div>
                         
                     </div>
 
                     {/* Call to Action */}
-                    <div className="flex items-center max-[1020px]:hidden">
-                        <Link href={shop_destination || "/"} className="text-white pr-6">
-                            <FontAwesomeIcon className="over:opacity-80 transition-all" style={{ width: "24px", height: "24px" }} size="sm" icon={faCartShopping} />
-                        </Link>
+                    <div className="flex items-center max-[1020px]:hidden gap-5">
+                        <Cart />
                         <div>
                             <CallToActionButton destination={callToActionDestination} buttonLabel={callToActionLabel} type="secondary"></CallToActionButton>
                         </div>
                     </div>
 
                     {/* Mobile Header Button */}
-                    <div className="flex items-center  menu">
-                        <Link href={shop_destination || "/"} className="text-white pr-6 cursor-pointer">
-                                    <FontAwesomeIcon className="over:opacity-80 transition-all" style={{ width: "24px", height: "24px" }} size="sm" icon={faCartShopping} />
-                        </Link>  
+                    <div className="flex items-center gap-4 menu">
+                        <Cart />
                         <div className="my-7 flex items-center cursor-pointer" onClick={onClick}>
                             <FontAwesomeIcon className="hover:opacity-80 transition-all" style={{ width: "24px", height: "24px" }} color={"#FFFFFF"} size="sm" icon={faBars} />
                         </div>
