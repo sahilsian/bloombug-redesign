@@ -5,10 +5,10 @@ import CartContents from '../components/Woo/Cart/CartContents.component';
 // Types
 import type { NextPage } from 'next';
 
-const Handlekurv: NextPage = () => (
+const HandleCart: NextPage = () => (
   <Layout title="Cart">
     <CartContents />
   </Layout>
 );
 
-export default Handlekurv;
+export default HandleCart;

@@ -10,6 +10,7 @@ import MobileSearch from '../AlgoliaSearch/MobileSearch.component';
 import useIsMobile from '../../../lib/hooks/useIsMobile';
 
 import Image from 'next/image';
+import siteConfig from '../../../site.config';
 
 /**
  * Navigation for the application.
@@ -19,7 +20,7 @@ const Navbar = () => {
   const isMobile = useIsMobile();
   return (
     <header>
-      <nav id="header" className="top-0 z-50 w-full py-1 bg-[#412842] ">
+      <nav style={{backgroundColor: siteConfig.colors.solids.cover}}  id="header" className="top-0 z-50 w-full py-1 ">
         <div className="container max-w-[1400px] flex md:flex-wrap flex-col md:flex-row items-center justify-between px-4 py-3 mx-auto mt-0 md:min-w-96">
           
           <div

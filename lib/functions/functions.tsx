@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { RootObject, Product } from '../../stores/CartProvider';
 import { ChangeEvent } from 'react';
 import { IVariationNodes } from '../../components/Woo/Product/AddToCart.component';
+import { getCreateOrderLineItems } from "../utils/order"
 
 /* Interface for products*/
 
@@ -176,7 +177,7 @@ export const getFormattedCart = (data: IFormattedCartProps) => {
       '',
     );
 
-    product.productId = givenProduct.productId;
+    product.productId = givenProduct.databaseId;
     product.cartKey = givenProducts[Number(i)].key;
     product.name = givenProduct.name;
     product.qty = givenProducts[Number(i)].quantity;
@@ -209,13 +210,13 @@ export const getFormattedCart = (data: IFormattedCartProps) => {
   return formattedCart;
 };
 
-export const createCheckoutData = (order: ICheckoutDataProps) => ({
+export const createCheckoutData = (order: ICheckoutDataProps, products: Product[]) => ({
   clientMutationId: uuidv4(),
   billing: {
     firstName: order.firstName,
     lastName: order.lastName,
     address1: order.address1,
-    address2: order.address2,
+    address2: order.address2 || null,
     city: order.city,
     country: order.country,
     state: order.state,
@@ -239,8 +240,8 @@ export const createCheckoutData = (order: ICheckoutDataProps) => ({
   },
   shipToDifferentAddress: false,
   paymentMethod: order.paymentMethod,
-  isPaid: false,
-  transactionId: 'fhggdfjgfi',
+  payment_method_title: 'Stripe',
+  line_items: getCreateOrderLineItems(products)
 });
 
 /**

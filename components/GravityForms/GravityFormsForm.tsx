@@ -42,7 +42,7 @@ export default function GravityFormsForm({ form, id }: Props) {
     setData(data.result)
     if(data.result?.submitGfForm.errors == null) {
       sendGTMEvent({ event: 'formSubmission', value: id });
-      response.ok ? Router.push('/thank-you') : null
+      response.ok ? Router.push('/products/reiki-tour?id=1624') : null
     }
 
   }

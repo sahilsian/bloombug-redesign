@@ -13,12 +13,12 @@ interface ILinks {
     {
       id: 1,
       title: 'Products',
-      href: '/produkter',
+      href: '/products',
     },
     {
       id: 2,
       title: 'Categories',
-      href: '/kategorier',
+      href: '/categories',
     },
   ];
   

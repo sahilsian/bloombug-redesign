@@ -1,5 +1,4 @@
 import Head from 'next/head';
-
 import Navbar from './Navbar.component';
 
 interface IHeaderProps {
@@ -17,11 +16,11 @@ const Header = ({ title }: IHeaderProps) => (
   <>
     <Head>
       <title>{title}</title>
-      <meta name="description" content="Bloom Bug Screens Store" />
-      <meta name="keywords" content="Bloom Bug Screens, Bloom Bug Screens Store" />
+      <meta name="description" content="Greg Birring Coaching Store" />
+      <meta name="keywords" content="Greg Birring Coaching - Greg Birring Coaching Store" />
       <meta
         property="og:title"
-        content="Bloom Bug Screens Store"
+        content="Greg Birring Coaching Store"
         key="pagetitle"
       />
     </Head>

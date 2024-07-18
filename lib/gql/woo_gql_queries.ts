@@ -16,6 +16,11 @@ export const GET_SINGLE_PRODUCT = gql`
         srcSet
         sourceUrl
       }
+      galleryImages {
+        nodes {
+          sourceUrl
+        }
+      }
       name
       ... on SimpleProduct {
         salePrice
@@ -31,16 +36,7 @@ export const GET_SINGLE_PRODUCT = gql`
         shortDescription
         price
         id
-        allPaColor {
-          nodes {
-            name
-          }
-        }
-        allPaSize {
-          nodes {
-            name
-          }
-        }
+        
         variations {
           nodes {
             id

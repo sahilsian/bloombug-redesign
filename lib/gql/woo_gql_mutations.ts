@@ -73,6 +73,7 @@ export const CHECKOUT_MUTATION = gql`
     }
   }
 `;
+
 export const UPDATE_CART = gql`
   mutation ($input: UpdateItemQuantitiesInput!) {
     updateItemQuantities(input: $input) {

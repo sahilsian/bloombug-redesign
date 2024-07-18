@@ -27,7 +27,7 @@ const Button = ({
   <button
     onClick={handleButtonClick}
     disabled={buttonDisabled}
-    className={`px-2 lg:px-4 w-full py-5 font-bold bg-blue-500 border border-gray-400 border-solid rounded text-white ease-in-out transition-all duration-300 disabled:opacity-50
+    className={` w-full py-5 font-bold bg-blue-500 border border-gray-400 border-solid rounded text-white ease-in-out transition-all duration-300 disabled:opacity-50
       ${
         color === 'blue'
           ? 'bg-blue-500 hover:bg-blue-600'

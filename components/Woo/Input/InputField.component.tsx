@@ -1,4 +1,5 @@
 import { FieldValues, useFormContext, UseFormRegister } from 'react-hook-form';
+import siteConfig from '../../../site.config';
 
 interface ICustomValidation {
   required?: boolean;
@@ -36,12 +37,12 @@ export const InputField = ({
   const { register } = useFormContext();
 
   return (
-    <div className="w-1/2 p-2">
-      <label htmlFor={inputName} className="pb-4">
+    <div className="w-full pb-3">
+      <label htmlFor={inputName} className="pb-2 block">
         {inputLabel}
       </label>
       <input
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        style={{borderColor: siteConfig.colors.solids.cover, color: siteConfig.colors.texts.secondary, borderWidth: "2px"}} className="py-4 mb-2 text-black text-sm w-full outline-none outline-0 bg-white px-3 rounded-[4px] "
         id={inputName}
         placeholder={inputLabel}
         type={type ?? 'text'}

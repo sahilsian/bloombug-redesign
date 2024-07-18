@@ -11,7 +11,7 @@ const Hero = () => (
     <div className="container mx-auto">
       <div className="flex flex-col items-start justify-center w-full px-6 tracking-wide lg:w-1/2">
         <h1 className="p-4 my-4 text-2xl text-white bg-black rounded-lg">
-          Shop Bug Screens
+          Shop All Products
         </h1>
 
         <a

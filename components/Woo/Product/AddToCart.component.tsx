@@ -26,6 +26,11 @@ interface IImage {
   sourceUrl: string;
 }
 
+interface IImageNode {
+  __typename: string;
+  nodes: IImage[]
+}
+
 interface IVariationNode {
   __typename: string;
   name: string;
@@ -42,6 +47,7 @@ interface IAllPaSizes {
 }
 
 export interface IVariationNodes {
+  node: any;
   __typename: string;
   id: string;
   databaseId: number;
@@ -69,6 +75,7 @@ export interface IProduct {
   description: string;
   onSale: boolean;
   image: IImage;
+  galleryImages: IImageNode;
   name: string;
   salePrice?: string;
   regularPrice: string;
@@ -96,11 +103,11 @@ const AddToCart = ({ product, variationId }: IProductRootObject) => {
   const [requestError, setRequestError] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
 
-  const productId = product?.databaseId ? product?.databaseId : variationId;
-
   const productQueryInput = {
     clientMutationId: uuidv4(), // Generate a unique id.
-    productId,
+    productId: product?.databaseId,
+    variationId: variationId
+
   };
 
   // Get cart data query

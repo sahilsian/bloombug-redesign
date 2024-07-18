@@ -10,6 +10,7 @@ import "aos/dist/aos.css";
 import React from 'react';
 import siteConfig from '../site.config';
 import { CartProvider } from '../stores/CartProvider';
+import '@fortawesome/fontawesome-svg-core/styles.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
 

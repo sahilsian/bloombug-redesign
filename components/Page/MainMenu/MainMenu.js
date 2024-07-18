@@ -11,7 +11,7 @@ import { Label } from "../../Custom/Label";
 import { useCallback, useEffect, useState } from "react";
 import Cart from "../../Woo/Header/Cart.component";
 
-export const MainMenu = ({ items, active, callToActionLabel, callToActionDestination, shop_destination, onClick }) => {
+export const MainMenu = ({ items, active, callToActionLabel, callToActionDestination, onClick }) => {
     const router = useRouter();
 
     const [scrollY, setScrollY] = useState('');

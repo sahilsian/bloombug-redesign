@@ -7,11 +7,13 @@ import { filteredVariantPrice, paddedPrice } from '../../../lib/functions/functi
 // Components
 import AddToCart, { IProductRootObject } from './AddToCart.component';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.component';
+import Image from 'next/image';
 
 const SingleProduct = ({ product }: IProductRootObject) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [selectedVariation, setSelectedVariation] = useState<number>();
-  const [tab, setTab] = useState<string>("Additional Information")
+  const [selectedVartiationUI, setSelectedVariationUI] = useState<any>();
+  const [tab, setTab] = useState<string>("Additional Information");
 
   const placeholderFallBack = 'https://via.placeholder.com/600';
 
@@ -23,7 +25,7 @@ const SingleProduct = ({ product }: IProductRootObject) => {
     }
   }, [product.variations]);
 
-  let { description, shortDescription, stockQuantity, image, name, onSale, price, regularPrice, salePrice } =
+  let { description, shortDescription, galleryImages, stockQuantity, image, name, onSale, price, regularPrice, salePrice } =
     product;
 
   console.log(description)
@@ -46,36 +48,65 @@ const SingleProduct = ({ product }: IProductRootObject) => {
     <section className="py-8 bg-white mb-12 sm:mb-2">
       {/* Show loading spinner while loading, and hide content while loading */}
       {isLoading ? (
-        <div className="h-56 mt-20">
-          <p className="text-2xl font-bold text-center">Loading Products...</p>
+        <div className="">
+          <p className="text-2xl font-bold text-center">Loading Product...</p>
           <br />
           <LoadingSpinner />
         </div>
       ) : (
-        <div className=' pb-12 px-4'>
+        <div className=' pb-12 '>
 
-          <div className="container flex flex-wrap items-center pt-4 mx-auto ">
-            <div className="grid grid-cols-1 gap-4 mt-16 lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-2">
-              {image && (
-                <img
-                  id="product-image"
-                  src={image.sourceUrl}
-                  alt={name}
-                  className="h-auto p-8 transition duration-500 ease-in-out transform xl:p-2 md:p-2 lg:p-2 hover:grow hover:scale-105"
-                />
-              )}
-              {!image && (
-                <img
-                  id="product-image"
-                  src={
-                    process.env.NEXT_PUBLIC_PLACEHOLDER_LARGE_IMAGE_URL ??
-                    placeholderFallBack
-                  }
-                  alt={name}
-                  className="h-auto p-8 transition duration-500 ease-in-out transform xl:p-2 md:p-2 lg:p-2 hover:grow hover:shadow-lg hover:scale-105"
-                />
-              )}
-              <div className="">
+          <div className="container mx-auto ">
+            <div className="flex gap-8 flex-wrap">
+              <div className='flex-1 minw300'>
+                <div>
+                  {image && (
+                    <Image
+                      id="product-image"
+                      src={image.sourceUrl}
+                      alt={name}
+                      width={800}
+                      height={800}
+                      className="h-auto transition duration-500 ease-in-out transform xl:p-2 md:p-2 lg:p-2 hover:grow hover:scale-[102%]"
+                    />
+                  )}
+                  {!image && (
+                    <Image
+                      id="product-image"
+                      src={
+                        process.env.NEXT_PUBLIC_PLACEHOLDER_LARGE_IMAGE_URL ??
+                        placeholderFallBack
+                      }
+                      alt={name}
+                      width={800}
+                      height={800}
+                      className="h-auto transition duration-500 ease-in-out transform hover:grow hover:shadow-lg hover:scale-102"
+                    />
+                  )}
+                </div>
+
+                <div>
+                  {galleryImages && (
+                    <div className='flex gap-3 px-2'>
+                      {galleryImages.nodes.map((img) => {
+                        return (
+                          <div>
+                            <Image
+                              src={img.sourceUrl}
+                              width={100}
+                              height={100}
+                              alt='Gallery Node'
+                            >
+                            </Image>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex-1 minw300">
                 <p className="text-3xl font-bold text-left">{name}</p>
                 {/* Display sale price when on sale */}
                 {onSale && (
@@ -95,7 +126,7 @@ const SingleProduct = ({ product }: IProductRootObject) => {
                   <p className="pt-1 mt-4 text-2xl text-gray-900"> {price}</p>
                 )}
                 <p className="pt-1 mt-2 text-lg text-gray-900">
-                  <p className='setHTML' dangerouslySetInnerHTML={{__html: shortDescription}}></p>
+                  <p className='setHTML' dangerouslySetInnerHTML={{ __html: shortDescription }}></p>
                 </p>
                 {Boolean(product.stockQuantity) && (
                   <p
@@ -107,7 +138,7 @@ const SingleProduct = ({ product }: IProductRootObject) => {
                 )}
                 {product.variations && (
                   <p className="pt-1 pb-4 mt-4 text-xl text-gray-900">
-                    <div className="py-2 font-bold pb-4">Size</div>
+                    <div className="py-2 font-bold pb-4">Select an Option</div>
                     <select
                       id="variant"
                       name="variant"
@@ -117,12 +148,12 @@ const SingleProduct = ({ product }: IProductRootObject) => {
                       }}
                     >
                       {product.variations.nodes.map(
-                        ({ id, name, databaseId, stockQuantity }) => {
+                        (item) => {
                           // Remove product name from variation name
-                          const filteredName = name.split('- ').pop();
+                          console.log(item)
                           return (
-                            <option key={id} value={databaseId}>
-                              {filteredName} - ({stockQuantity} in stock)
+                            <option key={item.id} value={item.databaseId}>
+                              {item.name.split(' - ')[1]} {item.onSale ? item.salePrice : item.regularPrice}
                             </option>
                           );
                         },
@@ -146,23 +177,23 @@ const SingleProduct = ({ product }: IProductRootObject) => {
               </div>
             </div>
           </div>
-          <div className='flex gap-7 mt-10'>
-              <div onClick={()=> setTab("Additional Information")} className={`text-xl py-4 ${tab == 'Additional Information' ? "border-b-blue-500 border-b-2" : "border-b-slate-500 border-b-2"} cursor-pointer`}>
-                Additional Information
-              </div>
-              <div onClick={()=> setTab("Related Products")} className={`text-xl py-4 ${tab == 'Related Products' ? "border-b-blue-500 border-b-2" : "border-b-slate-300 border-b-2"} cursor-pointer`}>
-                Related Products
-              </div>
+          <div className='flex gap-7 mt-[150px]'>
+            <div onClick={() => setTab("Additional Information")} className={`text-xl py-4 ${tab == 'Additional Information' ? "border-b-blue-500 border-b-2" : "border-b-slate-500 border-b-2"} cursor-pointer`}>
+              Additional Information
+            </div>
+            <div onClick={() => setTab("Related Products")} className={`text-xl py-4 ${tab == 'Related Products' ? "border-b-blue-500 border-b-2" : "border-b-slate-300 border-b-2"} cursor-pointer`}>
+              Related Products
+            </div>
           </div>
           <div className='py-4'>
-            {tab === "Additional Information" && 
+            {tab === "Additional Information" &&
               <div>
                 <p className="pt-1 mt-2 text-lg text-gray-900">
-                  <p className='setHTML' dangerouslySetInnerHTML={{__html: description}}></p>
+                  <p className='setHTML' dangerouslySetInnerHTML={{ __html: description }}></p>
                 </p>
               </div>
             }
-            {tab === "Related Products" && 
+            {tab === "Related Products" &&
               <div>
                 No Related Products Found
               </div>

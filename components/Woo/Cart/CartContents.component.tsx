@@ -45,11 +45,11 @@ const CartContents = () => {
     notifyOnNetworkStatusChange: true,
     onCompleted: () => {
       // Update cart in the localStorage.
+      console.log(data)
       const updatedCart = getFormattedCart(data);
 
       if (!updatedCart && !data.cart.contents.nodes.length) {
         // Clear the localStorage if we have no remote cart
-
         localStorage.removeItem('woocommerce-cart');
         setCart(null);
         return;
@@ -103,35 +103,39 @@ const CartContents = () => {
 
   useEffect(() => {
     refetch();
-    console.log(data)
   }, [refetch]);
 
   return (
-    <section className="py-8 mt-10 pb-[200px]">
+    <section className="flex-1 minw300 pb-[100px]">
       <div className="container items-center mx-auto">
-      <div className='mt-10 p-4 border-2 mx-auto'>
+        <div className='p-4 border-2 mx-auto'>
 
-        {data?.cart?.contents?.nodes.length ? (
-          data.cart.contents.nodes.map((item: IProductRootObject) => (
+          {data?.cart?.contents?.nodes.length ? (
             <div>
 
-                <div className='mb-10'>
-                  <div className='font-bold py-5 pb-8 text-xl'>Your Cart</div>
-                  <div className='flex-col gap-4'>
-                    {data.cart.contents.nodes.map((item: IProductRootObject) => (
-                      <div className='flex justify-between'>
-                        <div className='flex gap-4'>
-                          <div className='border-2 p-4'>
-                            <Image alt={"cart image"} src={item.product.node.image.sourceUrl} width={150} height={150}></Image>
-                          </div>
-                          <div>
-                            <div className="font-bold mb-5">
-                              {item.product.node.name}
+              <div className='mb-10'>
+                <div className='font-bold py-5 pb-8 text-xl'>Your Cart</div>
+                <div className='flex-col flex gap-4'>
+                  {data.cart.contents.nodes.map((item: IProductRootObject) => (
+                    <div>
+                      {isCheckoutPage ?
+                        <div className=' border-2 p-4'>
+                          <div className='w-full'>
+                            <div className=' mb-auto'>
+                              <Image className='w-full h-full object-cover' alt={"cart image"} src={item.product.node.image.sourceUrl} width={600} height={600}></Image>
                             </div>
+                            <div className='w-full mt-3 text-center'>
+                              <div className="font-medium">
+
+                                {item.product.node.name}: <span className='font-light'>{item.variation.node.name}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div className='flex mt-5 justify-between items-center'>
                             <div>
-                              <div className='mb-2'>Quantity</div>
+                              <div className='mb-2 text-xs'>Quantity</div>
                               <input
-                                className="border-2 p-3"
+                                className="border-2 max-w-[100px] md:max-w-[100px] w-full p-2"
                                 type="number"
                                 min="1"
                                 value={item.quantity}
@@ -146,127 +150,180 @@ const CartContents = () => {
                                 }}
                               />
                             </div>
+                            <div className=' flex h-full  items-center cursor-pointer text-right'>
+                              <div onClick={() => {
+                                handleRemoveProductClick(
+                                  item.key,
+                                  data.cart.contents.nodes,
+                                )
+                              }} className='border-2 p-2 flex items-center justify-center max-w-[22px]'>
+                                <FontAwesomeIcon width={"24px"} height={"24px"} icon={faClose}></FontAwesomeIcon>
+                              </div>
+                            </div>
+
                           </div>
-                        </div>
-                        <div>
-                          <div className="md:w-full lg:w-full xl:w-full text-xl mb-14">
-                            {item.subtotal}
-                          </div>
-                          <div className=' cursor-pointer text-right'>
-                            <div  onClick={() => {
-                              handleRemoveProductClick(
-                                item.key,
-                                data.cart.contents.nodes,
-                              )
-                            }} className='border-2 p-2 flex items-center justify-center'>
-                              <FontAwesomeIcon width={"24px"} height={"24px"} icon={faClose}></FontAwesomeIcon>
+                          <div className=" mt-4 flex justify-between">
+                            <div>
+                              <div className='text-zinc-400'>Price</div>
+                            </div>
+                            <div>
+                              <div className=''>{item.subtotal}</div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                        :
+                        <div className='flex justify-between gap-4 border-b-[1px] pb-4'>
+                          <div className='flex gap-4 w-full'>
+                            <div className=' mb-auto'>
+                              <Image className='min-w-[100px] max-w-[250px] w-full h-full object-cover' alt={"cart image"} src={item.product.node.image.sourceUrl} width={300} height={300}></Image>
+                            </div>
+                            <div className='max-w-[170px] md:max-w-[300px] w-full'>
+                              <div className="font-medium">
+
+                                {item.product.node.name}: <span className='font-light'>{item.variation.node.name}</span>
+                              </div>
+                              <div>
+                              </div>
+                              <div>
+                                <div className='mb-2 text-xs mt-5'>Quantity</div>
+                                <input
+                                  className="border-2 max-w-[70px] md:max-w-[70px] w-full p-2"
+                                  type="number"
+                                  min="1"
+                                  value={item.quantity}
+                                  onChange={(event) => {
+                                    handleQuantityChange(
+                                      event,
+                                      item.key,
+                                      data.cart.contents.nodes,
+                                      updateCart,
+                                      updateCartProcessing,
+                                    );
+                                  }}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div className='flex flex-col items-end'>
+                            <div className="md:w-full lg:w-full xl:w-full text-xl mb-14">
+                              {item.subtotal}
+                            </div>
+                            <div className=' cursor-pointer text-right'>
+                              <div onClick={() => {
+                                handleRemoveProductClick(
+                                  item.key,
+                                  data.cart.contents.nodes,
+                                )
+                              }} className='border-2 p-2 flex items-center justify-center max-w-[22px]'>
+                                <FontAwesomeIcon width={"24px"} height={"24px"} icon={faClose}></FontAwesomeIcon>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      }
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className=' mb-[40px]'>
+                <div className='border-b-[1px] mb-7'></div>
+                <div className='mt-3 flex justify-between'>
+                  <div>
+                    <div className='text-zinc-400'>Sub Total</div>
+                  </div>
+                  <div>
+                    <div className=''>{data?.cart?.total}</div>
                   </div>
                 </div>
-                <div className=' mb-[40px]'>
+                {data?.cart?.discountTotal != '$0.00' &&
                   <div className='mt-3 flex justify-between'>
                     <div>
-                      <div className='text-zinc-400'>Sub Total</div>
+                      <div className='text-zinc-400'>Discount Total</div>
                     </div>
                     <div>
                       <div className=''>{data?.cart?.total}</div>
                     </div>
                   </div>
-                  {data?.cart?.discountTotal != '$0.00' &&
-                    <div className='mt-3 flex justify-between'>
-                      <div>
-                        <div className='text-zinc-400'>Discount Total</div>
-                      </div>
-                      <div>
-                        <div className='text-green-400'>{data?.cart?.total}</div>
-                      </div>
+                }
+
+                {data?.cart?.totalTax &&
+                  <div className='mt-3 flex justify-between'>
+                    <div>
+                      <div className='text-zinc-400'>Tax</div>
                     </div>
-                  }
-
-                  {data?.cart?.totalTax &&
-                    <div className='mt-3 flex justify-between'>
-                      <div>
-                        <div className='text-zinc-400'>Tax</div>
-                      </div>
-                      <div>
-                        <div className=''>{data?.cart?.totalTax}</div>
-                      </div>
-                    </div>
-                  }
-
-                  {data?.cart?.shippingTotal &&
-                    <div className='mt-3 flex justify-between'>
-                      <div>
-                        <div className='text-zinc-400'>Shipping</div>
-                      </div>
-                      <div>
-                        <div className=''>{data?.cart?.shippingTotal}</div>
-                      </div>
-                    </div>
-                  }
-
-                  {data?.cart?.feeTotal &&
-                    <div className='mt-3 flex justify-between'>
-                      <div>
-                        <div className='text-zinc-400'>Fees</div>
-                      </div>
-                      <div>
-                        <div className=''>{data?.cart?.feeTotal}</div>
-                      </div>
-                    </div>
-                  }
-
-                  {data?.cart?.feeTotal &&
-                    <div className='mt-3 flex justify-between'>
-                      <div>
-                        <div className='font-bold'>Total</div>
-                      </div>
-                      <div>
-                        <div className='font-bold'>{data?.cart?.total}</div>
-                      </div>
-                    </div>
-                  }
-
-
-
-                </div>
-                {updateCartProcessing && (
-                  <div className="mt-4 w-full">
-                    <div className="text-xl mx-auto text-center">
-                      Updating count, please wait...
-                      <LoadingSpinner />
+                    <div>
+                      <div className=''>{data?.cart?.totalTax}</div>
                     </div>
                   </div>
-                )}
-                {!isCheckoutPage && data?.cart?.contents?.nodes.length ? (
-                  <div className="mt-4 mx-auto">
-                    <Link href="/" passHref>
-                      <Button>Checkout</Button>
-                    </Link>
+                }
+
+                {data?.cart?.shippingTotal &&
+                  <div className='mt-3 flex justify-between'>
+                    <div>
+                      <div className='text-zinc-400'>Shipping</div>
+                    </div>
+                    <div>
+                      <div className=''>{data?.cart?.shippingTotal}</div>
+                    </div>
                   </div>
-                ) : null}
+                }
+
+                {data?.cart?.feeTotal &&
+                  <div className='mt-3 flex justify-between'>
+                    <div>
+                      <div className='text-zinc-400'>Fees</div>
+                    </div>
+                    <div>
+                      <div className=''>{data?.cart?.feeTotal}</div>
+                    </div>
+                  </div>
+                }
+
+                {data?.cart?.feeTotal &&
+                  <div className='mt-3 flex justify-between'>
+                    <div>
+                      <div className='font-bold'>Total</div>
+                    </div>
+                    <div>
+                      <div className='font-bold'>{data?.cart?.total}</div>
+                    </div>
+                  </div>
+                }
+
+
+
               </div>
-
-          ))
-        ) : (
-          <div>
-            <h1 className="text-2xl mx-auto mb-5">
-              No products added in shopping cart.
-            </h1>
-            <div>
-              <Link href="/products">
-                <div className='p-4 text-center bg-blue-500 font-bold text-white'>
-                  Shop Screens
+              {updateCartProcessing && (
+                <div className="mt-4 w-full">
+                  <div className="text-xl mx-auto text-center">
+                    Updating count, please wait...
+                    <LoadingSpinner />
+                  </div>
                 </div>
-              </Link>
+              )}
+              {!isCheckoutPage && data?.cart?.contents?.nodes.length ? (
+                <div className="mt-4 mx-auto">
+                  <Link href="/checkout" passHref>
+                    <Button>Checkout</Button>
+                  </Link>
+                </div>
+              ) : null}
             </div>
-          </div>
-        )}
-      </div>
+          ) : (
+            <div>
+              <h1 className="text-2xl mx-auto mb-5">
+                No products added in shopping cart.
+              </h1>
+              <div>
+                <Link href="/products">
+                  <div className='p-4 text-center bg-blue-500 font-bold text-white'>
+                    Shop All Products
+                  </div>
+                </Link>
+              </div>
+            </div>
+          )}
+        </div>
 
 
       </div>

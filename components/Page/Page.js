@@ -16,7 +16,7 @@ export const Page = (props) => {
     const router = useRouter()
     const [active, setActive] = useState(false)
 
-    useEffect(()=> {
+    useEffect(() => {
         setActive(false)
     }, [router.reload])
 
@@ -26,8 +26,8 @@ export const Page = (props) => {
             <Head>
                 <link rel="shortcut icon" href="/favicon/favicon.ico" />
                 <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-                <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png"/>
-                <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png"/>
+                <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+                <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
                 <title>{props?.data?.seo?.title || ""}</title>
                 <meta name='description' content={props.data.seo?.metaDesc || ""}></meta>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"></meta>
@@ -64,52 +64,52 @@ export const Page = (props) => {
             </Head>
             <GoogleAnalytics gaId="G-CHR0TKY6LB" />
             <div className='relative overflow-hidden w-full '>
-                <div style={{width: active ? "300px" : "0px", transition: "width 0.2s", backgroundColor: siteConfig.colors.solids.cover}} className='fixed h-[200%] overflow-hidden z-[50]'>
+                <div style={{ width: active ? "300px" : "0px", transition: "width 0.2s", backgroundColor: siteConfig.colors.solids.cover }} className='fixed h-[200%] overflow-hidden z-[50]'>
                     <div className='pt-[120px] px-[20px]'>
 
-                    {/* Mobile Menu */}
-                    {props.data.mainMenuItems.map((item) => {
-                        return (
-                            <div>
-                            <div style={{opacity: active ? "100" : "0", transition: '0.3s opacity ease'}} className='text-white'>
-                                <Link className='block text-[18px] pb-3 mb-2' href={item.destination}>
-                                    {item.label}
-                                </Link>
-                                
-                            </div>
-                            {item.subMenuItem.map((subitem) => {
-                                return (
-                                    <div style={{opacity: active ? "100" : "0", transition: '0.3s opacity ease'}}>
-                                        <Link className='block text-white font-[200] text-[15px] pl-5 pb-3 mb-2' href={subitem.destination}>
-                                    {subitem.label}
-                                    </Link>
+                        {/* Mobile Menu */}
+                        {props.data.mainMenuItems.map((item) => {
+                            return (
+                                <div>
+                                    <div style={{ opacity: active ? "100" : "0", transition: '0.3s opacity ease' }} className='text-white'>
+                                        <Link className='block text-[18px] pb-3 mb-2' href={item.destination}>
+                                            {item.label}
+                                        </Link>
+
                                     </div>
-                                )
-                                })}
-                            </div>
-                        )
-                    })}
+                                    {item.subMenuItem.map((subitem) => {
+                                        return (
+                                            <div style={{ opacity: active ? "100" : "0", transition: '0.3s opacity ease' }}>
+                                                <Link className='block text-white font-[200] text-[15px] pl-5 pb-3 mb-2' href={subitem.destination}>
+                                                    {subitem.label}
+                                                </Link>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            )
+                        })}
                     </div>
-                    <div style={{opacity: active ? "100" : "0", transition: '0.3s all ease'}} className='p-4'>
+                    <div style={{ opacity: active ? "100" : "0", transition: '0.3s all ease' }} className='p-4'>
                         <div className='my-4'>
-                        <CallToActionButton destination={props.data.callToActionDestination} buttonLabel={props.data.callToActionLabel} type="primary"></CallToActionButton>
+                            <CallToActionButton destination={props.data.callToActionDestination} buttonLabel={props.data.callToActionLabel} type="primary"></CallToActionButton>
                         </div>
-                        
+
                     </div>
 
                 </div>
                 <div >
                     {/* All Site Content */}
 
-                    <MainMenu active={active} onClick={()=> {
+                    <MainMenu active={active} onClick={() => {
                         setActive(!active);
-                        
-                    }} items={props.data.mainMenuItems} shop_destination={props.data.shop || ""} callToActionLabel={props.data.callToActionLabel} callToActionDestination={props.data.callToActionDestination}></MainMenu>
+
+                    }} items={props.data.mainMenuItems} callToActionLabel={props.data.callToActionLabel} callToActionDestination={props.data.callToActionDestination}></MainMenu>
                     <Analytics></Analytics>
                     <ParallaxProvider>
                         <BlockRenderer items={props.data.mainMenuItems} blocks={props.data.blocks}></BlockRenderer>
                     </ParallaxProvider>
-                    
+
                     <Footer callToActionLabel={props.data.callToActionLabel} callToActionDestination={props.data.callToActionDestination} items={props.data.mainMenuItems}></Footer>
                 </div>
             </div>

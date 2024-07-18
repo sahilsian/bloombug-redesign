@@ -1,7 +1,5 @@
 // Imports
 import { ReactNode, useContext, useEffect } from 'react';
-import { useQuery } from '@apollo/client';
-
 // Components
 import Header from '../Header/Header.component';
 import PageTitle from './PageTitle.component';
@@ -16,6 +14,7 @@ import { getFormattedCart } from '../../../lib/functions/functions';
 
 // GraphQL
 import { GET_CART } from '../../../lib/gql/woo_gql_queries';
+import { useQuery } from '@apollo/client';
 
 interface ILayoutProps {
   children?: ReactNode;
@@ -31,10 +30,37 @@ interface ILayoutProps {
  */
 
 const Layout = ({ children, title }: ILayoutProps) => {
+
+  const { setCart } = useContext(CartContext);
+
+  const { data, refetch } = useQuery(GET_CART, {
+    notifyOnNetworkStatusChange: true,
+    onCompleted: () => {
+      // Update cart in the localStorage.
+      const updatedCart = getFormattedCart(data);
+
+      if (!updatedCart && !data?.cart?.contents?.nodes.length) {
+        // Should we clear the localStorage if we have no remote cart?
+
+        return;
+      }
+
+      localStorage.setItem('woocommerce-cart', JSON.stringify(updatedCart));
+
+      // Update cart data in React Context.
+      setCart(updatedCart);
+    },
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
+
   return (
     <>
       <Header title={title} />
-      <div className='max-w-[1400px] mx-auto'>
+      <div className='max-w-[1400px] p-4 mx-auto'>
         <PageTitle title={title} />
       {children}
       </div>

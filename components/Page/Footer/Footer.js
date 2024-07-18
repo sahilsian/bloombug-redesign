@@ -40,6 +40,7 @@ export const Footer = ({ items, callToActionLabel, callToActionDestination }) =>
                                 <h4 className="text-[18px]">{siteConfig.texts.footer.phone}</h4>
                             </div>
                         </div>
+                        {siteConfig.texts.footer.location_dest && siteConfig.texts.footer.location &&
                         <div className=" border-b-[1px] border-b-[#ffffff20] mb-4">
                             <div className=" tracking-widest font-light text-[14px] mb-2">
                                 LOCATION
@@ -53,19 +54,26 @@ export const Footer = ({ items, callToActionLabel, callToActionDestination }) =>
                                 <h4 className="text-[18px]">{siteConfig.texts.footer.location_secondary}</h4>
                             </div>
                         </div>
+                        }
 
                         <div className="flex items-center gap-5 mb-7">
+                            {siteConfig.texts.footer.instagram &&
                             <Link className="hover:opacity-75 transition-all" href={siteConfig.texts.footer.instagram}>
                                 <FontAwesomeIcon icon={faInstagram} width={18}></FontAwesomeIcon>
                             </Link>
+                            }
+                            {siteConfig.texts.footer.facebook &&
                             <Link className="hover:opacity-75 transition-all" href={siteConfig.texts.footer.facebook}>
                                 <FontAwesomeIcon icon={faFacebook} width={18}></FontAwesomeIcon>
                             </Link>
+                            }
+                            {siteConfig.texts.footer.tiktok &&
                             <Link className="hover:opacity-75 transition-all" href={siteConfig.texts.footer.tiktok}>
                                 <FontAwesomeIcon icon={faTiktok} width={18}></FontAwesomeIcon>
                             </Link>
+                            }   
                         </div>
-                        
+                        {siteConfig.texts.footer.hours &&
                         <div className="mb-7 p-5 border-[1px] mb-4 border-[#ffffff20]">
                             <div className=" tracking-widest font-light text-[14px]">
                                  HOURS OF OPERATIONS
@@ -99,10 +107,13 @@ export const Footer = ({ items, callToActionLabel, callToActionDestination }) =>
                                 <h4 className="text-[18px]">{siteConfig.texts.footer.hours.sunday}</h4>
                             </div>
                         </div>
+                        }
+                        {siteConfig.texts.footer.cta &&
                         <div className="p-5 border-[1px] mb-4 border-[#ffffff20]">
                             <h5 className="text-center mb-2 text-[16px]">{siteConfig.texts.footer.cta}</h5>
                             <CallToActionButton buttonLabel={callToActionLabel} align={"center"} destination={callToActionDestination} type="secondary"></CallToActionButton>
                         </div>
+                        }
                     </div>
                 </div>
 

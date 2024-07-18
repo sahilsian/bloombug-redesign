@@ -15,12 +15,13 @@ interface IPageTitleProps {
  */
 const PageTitle = ({ title, marginLeft }: IPageTitleProps) => (
   <section
-    className={`container mx-auto mt-24 text-center bg-white`}
+    className={`container mx-auto pt-12  bg-white`}
   >
     <div>
       {/* 
       // @ts-ignore */}
-      <Heading textAlign={"left"} level={1} content={`${title}`}/>
+      <h1 className="text-[3rem]">{title}</h1>
+
     </div>
   </section>
 );
